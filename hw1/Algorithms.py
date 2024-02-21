@@ -95,7 +95,7 @@ class BFSAgent(Agent):
         node = BFS_node(env.get_initial_state())
 
         if self.env.is_final_state(node.state): # should check if terminated? only if initial state can be a hole
-            return (self.solution(node), total_cost, self.expanded)
+            return (self.solution(node), 0, self.expanded)
         
         # add node to open
         open.append(node)
@@ -157,30 +157,3 @@ class AStarEpsilonAgent():
     def search(self, env: DragonBallEnv, epsilon: int) -> Tuple[List[int], float, int]:
         raise NotImplementedError
     
-
-if __name__ == '__main__':
-    MAPS = {
-            "4x4": ["SFFF",
-                    "FDFF",
-                    "FFFD",
-                    "FFFG"],
-            "8x8": [
-                "SFFFFFFF",
-                "FFFFFTAL",
-                "TFFHFFTF",
-                "FFFFFHTF",
-                "FAFHFFFF",
-                "FHHFFFHF",
-                "DFTFHDTL",
-                "FLFHFFFG",
-            ],
-        }
-    env = DragonBallEnv(MAPS["8x8"])
-    state = env.reset()
-    BFS_agent = BFSAgent()
-    actions, total_cost, expanded = BFS_agent.search(env)
-    print(f"Total_cost: {total_cost}")
-    print(f"Expanded: {expanded}")
-    print(f"Actions: {actions}")
-
-    assert total_cost == 119.0, "Error in total cost returned"
