@@ -137,7 +137,7 @@ class BFSAgent(Agent):
                     open.append(child)
 
             # draw the current situation (where is the agent now)
-            self.animation(node.state)
+            #self.animation(node.state)
         return None # will never reach this because there is always a goal state
 
 
