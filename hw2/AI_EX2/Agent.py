@@ -35,6 +35,11 @@ class AgentGreedy(Agent):
         for child, op in zip(children, operators):
             child.apply_operator(robot_id, op)
         children_heuristics = [self.heuristic(child, robot_id) for child in children]
+        # print("\n\n--------------------------------------------")
+        # for i, c in zip(children_heuristics, children):
+        #     print(f"{i} : {c.print()}")
+        # print("--------------------------------------------\n\n")
+
         max_heuristic = max(children_heuristics)
         index_selected = children_heuristics.index(max_heuristic)
         return operators[index_selected]

@@ -83,8 +83,8 @@ def run_agents():
             if args.console_print:
                 print('initial board:')
                 env.print()
-            if args.screen_print:
-                env.pygame_print()
+            # if args.screen_print:
+            #     env.pygame_print()
 
             for _ in range(args.count_steps):
                 for i, agent_name in enumerate(agent_names):
@@ -98,8 +98,8 @@ def run_agents():
                 if args.console_print:
                     print('robot ' + str(i) + ' chose ' + op)
                     env.print()
-                if args.screen_print:
-                    env.pygame_print()
+                #if args.screen_print:
+                    #env.pygame_print()
                 if env.done():
                     break
             balances = env.get_balances()
