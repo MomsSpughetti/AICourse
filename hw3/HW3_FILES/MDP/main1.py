@@ -51,7 +51,7 @@ def example_driver():
     mdp = MDP(board=board_env,
               terminal_states=terminal_states_env,
               transition_function=transition_function_env,
-              gamma=0.9)
+              gamma=1.0)
 
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     print("@@@@@@ The board and rewards @@@@@@")
@@ -65,7 +65,9 @@ def example_driver():
     U = [[0, 0, 0, 0],
          [0, 0, 0, 0],
          [0, 0, 0, 0]]
-
+    U1 = [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]]
     print("\nInitial utility:")
     mdp.print_utility(U)
     print("\nFinal utility:")
@@ -86,6 +88,9 @@ def example_driver():
     policy = [['UP', 'UP', 'UP', None],
               ['UP', None, 'UP', None],
               ['UP', 'UP', 'UP', 'UP']]
+    policy1 = [['UP', 'UP', 'UP', 'UP', None],
+              ['UP', 'UP', None, 'UP', None],
+              ['UP', 'UP', 'UP', 'UP', 'UP']]
 
     print("\nInitial policy:")
     mdp.print_policy(policy)
@@ -93,31 +98,22 @@ def example_driver():
     policy_new = policy_iteration(mdp, policy)
     mdp.print_policy(policy_new)
 
+    print("Done!")
 
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     print("@@@@@@@@@ Get all policies @@@@@@@@")
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
 
     U_gap = [[0.749, 0.819, 0.876, 1.0],
-        [0.692, 0, 0.564, -1.0],
-        [0.623, 0.566, 0.518, 0.252]]
-    print("All policies for U with Epsilon: ", 0.001)
-    print("U: ")
-    mdp.print_utility(U_gap)
-    print("All policies: ")
-    num = get_all_policies(mdp, U_gap)
-    print("Number of policies: ", num)
-    print("\n")
+            [0.692, 0, 0.564, -1.0],
+            [0.623, 0.566, 0.518, 0.252]]
+    get_all_policies(mdp, U_gap)
 
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print("@@ Get policy for different rewards @@@@@@@@")
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print("@@@@@@@@@ Get all policies @@@@@@@@")
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
 
-    ranges = get_policy_for_different_rewards(mdp)
-    print("The rewards that change the policy:")
-    print(ranges)
-
-    print("Done!")
+    print(get_policy_for_different_rewards(mdp))
 
 if __name__ == '__main__':
 

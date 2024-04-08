@@ -1,7 +1,8 @@
 import argparse
 import os
 from mdp import MDP
-from mdp_implementation import value_iteration, get_policy, policy_evaluation, policy_iteration, get_all_policies, get_policy_for_different_rewards, parse_table
+from mdp_implementation import value_iteration, get_policy, policy_evaluation, policy_iteration
+
 
 def is_valid_file(parser, arg):
     if not os.path.exists(arg):
@@ -93,31 +94,8 @@ def example_driver():
     policy_new = policy_iteration(mdp, policy)
     mdp.print_policy(policy_new)
 
-
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print("@@@@@@@@@ Get all policies @@@@@@@@")
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-
-    U_gap = [[0.749, 0.819, 0.876, 1.0],
-        [0.692, 0, 0.564, -1.0],
-        [0.623, 0.566, 0.518, 0.252]]
-    print("All policies for U with Epsilon: ", 0.001)
-    print("U: ")
-    mdp.print_utility(U_gap)
-    print("All policies: ")
-    num = get_all_policies(mdp, U_gap)
-    print("Number of policies: ", num)
-    print("\n")
-
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print("@@ Get policy for different rewards @@@@@@@@")
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-
-    ranges = get_policy_for_different_rewards(mdp)
-    print("The rewards that change the policy:")
-    print(ranges)
-
     print("Done!")
+
 
 if __name__ == '__main__':
 
